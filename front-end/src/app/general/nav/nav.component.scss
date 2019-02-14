@@ -1,0 +1,74 @@
+@import './../../../variables.scss';
+.main-wrap-nav {
+    position:$fixed;
+    padding: $pix20;
+    top: 60px;
+    width: 85px;
+    overflow: hidden;
+    overflow-y: hidden !important;
+    transition: ease-in 0.3s;
+    z-index: 999;
+    
+    &:hover{
+        width: 400px;
+        transition: ease-in 0.3s;
+    }
+    &:hover .navbar{
+        border-radius: $pix10;
+        transition: ease-in 0.3s;
+    }
+}
+.main-wrap-nav {
+    .navbar {
+        padding: $pix10 $pix5;
+        background: $white;
+        border-radius: $pix35;
+        background: $gradient-4;
+        overflow: $hidden;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        transition: ease-in 0.3s;
+        height: 500px;
+    }
+    .collapse {
+        width: 100%;
+    }
+    .navbar-nav {
+        display: $display-inlineblock;
+        width: 100%;
+    }
+    .navbar-nav {
+        li{
+        display: $display-inlineblock;
+        min-width: 400px;
+        
+        }
+        li a {
+            font-size: $pix13;
+            color: $gray5;
+            line-height: $pix30;
+            font-weight:$weight600;
+            padding: $pix4 $pix10 $pix5 $pix2;
+
+            &:hover {
+                color: $green-2;
+            }
+            &:focus {
+                color: $green-2;
+            }
+            
+        }
+        li i {
+            font-size:22px;
+            width: 32px;
+            text-align: $center;
+            margin-right: $pix14;
+            padding-top:$pix0;
+            float: $left;
+            color: $gray5;
+        }
+        a.active {
+            color:$green-2 !important;
+        }
+    }
+}
+

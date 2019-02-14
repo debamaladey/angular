@@ -1,0 +1,38 @@
+@import './../../../../../variables.scss';
+
+.drop-hour {
+    width: 90px;
+    margin-right: $pix7;
+    font-size: 13px;
+}
+.input-sideby {
+    width: calc(100% - 100px);
+}
+.tod-table th span {
+    padding: $pix5 $pix0 $pix0 $pix0;
+    font-size: $pix13;
+    font-weight: $weight400;
+    color: #e3f3ff;
+    width: 79px;
+}
+.tod-table  thead th {
+    color: $white;
+    font-size: $pix15;
+    border: $pix0 !important;
+    padding: $pix8 $pix5;
+}
+.tod-table td {
+    font-size: $pix14;
+    padding: $pix9 $pix9 $pix9 $pix9;
+    font-weight:$weight700;
+    width: 12.5%;
+}
+.tod-table td span{
+    color: $gray-1;
+    font-size: $pix13;
+    font-weight: $weight600;
+    padding: $pix0;
+    width: 38%;
+}
+
+

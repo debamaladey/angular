@@ -1,0 +1,117 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <form [formGroup]="configFormGroup" (ngSubmit)="onSubmit()">
+                <div class="col-xl-12">
+                    <h1 class="float-left">Metering Configuration</h1>
+                </div>
+
+                <div class="col-lg-12 wrap-form float-left sel-admin-wrap">
+                    <div class="col-lg-12 float-left">
+                        <div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+                            {{errorMsg}}
+                        </div>
+                        <div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+                            {{succMsg}}
+                        </div>
+                    </div>
+                    <div class="w-100 float-left c-w-f inner-sel-admin">
+                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 float-left nopad-left">
+                            <mat-label>Types of Resources </mat-label>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-select [disabled]="isreadonly" disableOptionCentering (selectionChange)="resourceChange($event.value)"
+                                    formControlName="resource_id">
+                                    <mat-option value="">Select Resources</mat-option>
+                                    <mat-option *ngFor="let resource of resources" [value]="resource.resource_id">{{resource.resource_name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="configFormGroup.get('resource_id').invalid && (configFormGroup.get('resource_id').dirty || configFormGroup.get('resource_id').touched || submitted) && configFormGroup.get('resource_id').errors.required">Resources
+                                    types is required.</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left nopad-left">
+                            <mat-label>Main Meter</mat-label>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-select [disabled]="isreadonly" disableOptionCentering (selectionChange)="meterChange($event.value)"
+                                    formControlName="meter_id">
+                                    <mat-option value="">Select Meter</mat-option>
+                                    <mat-option *ngFor="let meter of meterList" [value]="meter.meter_id">{{meter.given_meter_id}}
+                                        [{{meter.meter_name}}]</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="configFormGroup.get('meter_id').invalid && (configFormGroup.get('meter_id').dirty || configFormGroup.get('meter_id').touched || submitted) && configFormGroup.get('meter_id').errors.required">Main
+                                    meter is required.</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrap-mani w-100 float-left" *ngIf="!configFormGroup.get('meter_id').invalid">
+                    <div class="meter-table-added col-lg-12 float-left table-wrap horizental-scroll-parent">
+                        <div class="inner-wrap-table w-100 float-left col-lg-12">
+                            <ng-scrollbar class="page-scroll" [trackX]="true" [compact]="compact" [invertY]="invertY"
+                                [invertX]="invertX">
+                                <table class="table table-bordered float-left table-horizental-scroll">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Resource Parameter</th>
+                                            <th scope="col">Resource Unit</th>
+                                            <th scope="col">Tag Meter(s)</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody formArrayName="tag_items">
+                                        <tr *ngFor="let tagItem of configFormGroup.get('tag_items').controls; let i = index;"
+                                            [formGroupName]="i">
+                                            <td class="noborder-right">
+                                                <mat-form-field appearance="outline" class="w-100">
+                                                    <mat-select disableOptionCentering (selectionChange)="parameterChange(i, $event.value)"
+                                                        formControlName="rp_id">
+                                                        <mat-option value="">Select Parameter</mat-option>
+                                                        <mat-option *ngFor="let parameter of parameterList" [value]="parameter.rp_id">{{parameter.parameter_name}}</mat-option>
+                                                    </mat-select>
+                                                    <mat-error *ngIf="tagItem.get('rp_id').invalid && (tagItem.get('rp_id').dirty || tagItem.get('rp_id').touched || submitted) && tagItem.get('rp_id').errors.required">Resource
+                                                        parameter is required.</mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="noborder-right">
+                                                <mat-form-field appearance="outline" class="w-100">
+                                                    <mat-select disableOptionCentering formControlName="ru_id">
+                                                        <mat-option value="">Select Unit</mat-option>
+                                                        <mat-option *ngFor="let unit of unitList[i]" [value]="unit.ru_id">{{unit.unit_name}}</mat-option>
+                                                    </mat-select>
+                                                    <mat-error *ngIf="tagItem.get('ru_id').invalid && (tagItem.get('ru_id').dirty || tagItem.get('ru_id').touched || submitted) && tagItem.get('ru_id').errors.required">Resource
+                                                        unit is required.</mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="noborder-right" >
+                                                <mat-form-field appearance="outline" class="w-100">
+                                                    <mat-select disableOptionCentering formControlName="tag_id" multiple>
+                                                        <mat-option *ngFor="let tag of tagList" [value]="tag.tag_id">{{tag.tag_name}}</mat-option>
+                                                    </mat-select>
+                                                    <mat-error *ngIf="tagItem.get('tag_id').invalid && (tagItem.get('tag_id').dirty || tagItem.get('tag_id').touched || submitted) && tagItem.get('tag_id').errors.required">Tag
+                                                        Meter is required.</mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="rel-pos noborder"><a *ngIf="(i+1) < configFormGroup.get('tag_items').controls.length"
+                                                    href="javascript:void(0);" (click)="removeTagDetails(i)" class="delete-but-table"><i
+                                                        class="material-icons">remove</i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-scrollbar>
+                            <a href="javascript:void(0);" (click)="addTagDetails()" class="add-but-table"><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 float-left wrap-button mar-bottom">
+                    <button mat-raised-button type="submit" (click)="submit('save')" class="float-left btn-common2 btn-01 mar-right">Save</button>
+                    <button mat-raised-button type="submit" (click)="submit('save_exit')" class="float-left btn-common2 btn-02">Save
+                        & Exit</button>
+                </div>
+            </form>
+        </div>
+    </ng-scrollbar>
+</section>

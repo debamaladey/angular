@@ -1,0 +1,146 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <div class="col-xl-12">
+                <h1 class="float-left">Add Template</h1>
+            </div>
+            <div class="alert alert-{{msgStatus}} alert-dismissible" *ngIf="msg">
+                {{msg}}
+            </div>
+
+            <div class="wrap-mani w-100 float-left">
+                <div class="col-lg-12 float-left wrap-set-value mar-top add-meter-wrap">
+                    <div class="bg-inner-area w-100 float-left">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label class="w-100 float-left">Name</mat-label>
+                            <mat-form-field class="example-full-width input-sideby" appearance="outline">
+                                <input matInput type="text" class="w-100">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label class="w-100 float-left">State</mat-label>
+                            <mat-form-field appearance="outline">
+                                <mat-select disableOptionCentering [(value)]="selected">
+                                    <mat-option value="option1">Select Option</mat-option>
+                                    <mat-option value="option2">Options</mat-option>
+                                    <mat-option value="option3">Options</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label class="w-100 float-left">Region</mat-label>
+                            <mat-form-field appearance="outline">
+                                <mat-select disableOptionCentering [(value)]="selected">
+                                    <mat-option value="option1">Select Option</mat-option>
+                                    <mat-option value="option2">Options</mat-option>
+                                    <mat-option value="option3">Options</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label class="w-100 float-left">Resource</mat-label>
+                            <mat-form-field appearance="outline">
+                                <mat-select disableOptionCentering [(value)]="selected">
+                                    <mat-option value="option1">Select Option</mat-option>
+                                    <mat-option value="option2">Options</mat-option>
+                                    <mat-option value="option3">Options</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label class="w-100 float-left">Unit</mat-label>
+                            <mat-form-field appearance="outline">
+                                <mat-select disableOptionCentering [(value)]="selected">
+                                    <mat-option value="option1">Select Option</mat-option>
+                                    <mat-option value="option2">Options</mat-option>
+                                    <mat-option value="option3">Options</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100 float-left ">
+                <div class="meter-table-added col-lg-12 float-left  table-wrap">
+                    <div class="inner-wrap-table w-100 float-left">
+                        <table class="table table-bordered float-left">
+                            <thead>
+                                <tr>
+                                    <th width="25%" scope="col">TOD</th>
+                                    <th width="25%" scope="col">Start Date</th>
+                                    <th width="25%" scope="col">End Date</th>
+                                    <th width="25%" scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Peak</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="rel-pos">
+                                            <input matInput [matDatepicker]="picker" placeholder="Select Date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="rel-pos">
+                                            <input matInput [matDatepicker]="picker1" placeholder="Select Date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Soulder</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="rel-pos">
+                                            <input matInput [matDatepicker]="picker5" placeholder="Select Date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker5></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="rel-pos">
+                                            <input matInput [matDatepicker]="picker2" placeholder="Select Date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Peak</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="rel-pos">
+                                            <input matInput [matDatepicker]="picker3" placeholder="Select Date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker3></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="rel-pos">
+                                            <input matInput [matDatepicker]="picker4" placeholder="Select Date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker4></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-12 float-left wrap-button mar-bottom nopad">
+                        <button mat-raised-button class="float-left btn-common2 btn-01 mar-right">Save</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </ng-scrollbar>
+</section>

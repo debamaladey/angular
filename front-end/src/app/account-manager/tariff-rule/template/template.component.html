@@ -1,0 +1,81 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+	<ng-scrollbar class="page-scroll">
+		<div class="wrap-mani w-100 float-left">
+			<div class="col-xl-12">
+				<h1 class="float-left">Template Selection</h1>
+			</div>
+            <div class="wrap-mani w-100 float-left">
+                <div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+                    {{errorMsg}}
+                </div>
+                <div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+                    {{succMsg}}
+                </div>
+            </div>
+
+			<div class="wrap-mani w-100 float-left">
+				<div class="col-lg-12 float-left wrap-set-value mar-top add-meter-wrap">
+					<div class="bg-inner-area w-100 float-left">
+						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+							<mat-label class="w-100 float-left">Customer Name</mat-label>
+							<mat-form-field class="example-full-width input-sideby" appearance="outline">
+								<input readonly matInput type="text" class="w-100" [value]="customer_name">
+							</mat-form-field>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+							<mat-label class="w-100 float-left">State</mat-label>
+							<mat-form-field class="example-full-width input-sideby" appearance="outline">
+								<input readonly matInput type="text" class="w-100" [value]="state_name">
+							</mat-form-field>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+							<mat-label class="w-100 float-left">Region</mat-label>
+							<mat-form-field class="example-full-width input-sideby" appearance="outline">
+								<input readonly matInput type="text" class="w-100" [value]="city_name">
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap-mani w-100 float-left">
+				<div class="col-lg-12 float-left wrap-set-value mar-top add-meter-wrap">
+					<div class="bg-inner-area w-100 float-left">
+						<div class="w-100 float-left" *ngFor="let resource of resources; let i = index">
+							<form [formGroup]="templateFormGroupArr[resource.resource_id]" (ngSubmit)="onSubmit(resource.resource_id)">
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+									<mat-label class="w-100 float-left">{{resource.resource_name}} Tariff Template</mat-label>
+									<mat-form-field appearance="outline">
+										<mat-select disableOptionCentering formControlName="tdl_id">
+											<mat-option value="">Select Template</mat-option>
+											<mat-option *ngFor="let template of resource.templates" [value]="template.tdl_id">{{template.temp_name}} | Unit: {{template.unit_name}}</mat-option>
+										</mat-select>
+										<mat-error *ngIf="templateFormGroupArr[resource.resource_id].get('tdl_id').invalid && (templateFormGroupArr[resource.resource_id].get('tdl_id').dirty || templateFormGroupArr[resource.resource_id].get('tdl_id').touched || submitted) && templateFormGroupArr[resource.resource_id].get('tdl_id').errors.required">Template
+											Name is required.</mat-error>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-12 col-md-3 col-lg-2 col-xl-2 float-left c-w-f">
+									<mat-label class="w-100 float-left">&nbsp;</mat-label>
+									<button mat-raised-button type="submit" class="float-left btn-common2 btn-01 mar-right">Set Template </button>
+								</div>
+								<div *ngIf="templateFormGroupArr[resource.resource_id].value.ruleCreateEnable" class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+									<mat-label class="w-100 float-left">Select Tariff Rule To Configure</mat-label>
+									<mat-form-field appearance="outline">
+										<mat-select disableOptionCentering formControlName="tariff_rule" (selectionChange)="tariffRuleChange($event.value)">
+											<mat-option value="">Select Tariff Rule</mat-option>
+											<mat-option *ngFor="let tariff_rules of tariff_rules_list_arr[resource.resource_id]" [value]="tariff_rules.data.tariff_rule_url+'/'+customerId+'/'+tariff_rules.tc_id" >{{tariff_rules.data.val}}</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</ng-scrollbar>
+</section>

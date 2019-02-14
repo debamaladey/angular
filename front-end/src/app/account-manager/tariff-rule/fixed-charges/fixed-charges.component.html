@@ -1,0 +1,95 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <div class="col-xl-12">
+                <h1 class="float-left">Fixed Charge Tariff Rule</h1>
+            </div>
+            <div class="wrap-mani w-100 float-left">
+                <div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+                    {{errorMsg}}
+                </div>
+                <div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+                    {{succMsg}}
+                </div>
+            </div>
+
+            <div class="wrap-mani w-100 float-left">
+                <div class="col-lg-12 float-left wrap-set-value mar-top add-meter-wrap">
+                    <div class="bg-inner-area w-100 float-left">
+                        <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 float-left c-w-f">
+                            <mat-label class="w-100 float-left">Template Name</mat-label>
+                            <mat-form-field class="example-full-width input-sideby w-100 float-left" appearance="outline">
+                                <input matInput type="text" class="w-100" readonly [value]="temp_name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 float-left c-w-f">
+                            <mat-label class="w-100 float-left">Select Tariff Rule To Configure</mat-label>
+                            <mat-form-field appearance="outline" class="w-100 float-left">
+                                <mat-select disableOptionCentering [value]="tariffRule" (selectionChange)="tariffRuleChange($event.value)">
+                                    <mat-option *ngFor="let tariff_rules of tariff_rules_list" [value]="tariff_rules.data.tariff_rule_url+'/'+customerId+'/'+tariff_rules.tc_id">{{tariff_rules.data.val}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="fixedChargeFormGroup" (ngSubmit)="onSubmit()">
+                <div class="wrap-mani w-100 float-left">
+                    <div class="meter-table-added col-lg-12 float-left table-wrap horizental-scroll-parent">
+                        <div class="inner-wrap-table w-100 float-left col-lg-12">
+                            <ng-scrollbar class="page-scroll" [trackX]="true" [compact]="compact" [invertY]="invertY"
+                                [invertX]="invertX">
+                                <table class="table table-bordered float-left table-horizental-scroll">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Charge</th>
+                                            <th scope="col">Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody formArrayName="rule_items">
+                                        <tr *ngFor="let ruleItem of fixedChargeFormGroup.get('rule_items').controls; let i = index;" [formGroupName]="i">
+                                            <td class="noborder-right">
+                                                {{ruleItem.value.tc_var_name}}
+                                            </td>
+                                            <td class="noborder-right" >
+                                                <div>
+                                                    <mat-form-field class="example-full-width input-sideby w-100 float-left" appearance="outline">
+                                                        <input matInput type="text" class="w-100"
+                                                        formControlName="trl4_value">
+                                                        <mat-error *ngIf="ruleItem.get('trl4_value').invalid && (ruleItem.get('trl4_value').dirty || ruleItem.get('trl4_value').touched || submitted) && ruleItem.get('trl4_value').errors.required">Value
+                                                            is required.</mat-error>
+                                                        <mat-error *ngIf="ruleItem.get('trl4_value').invalid && (ruleItem.get('trl4_value').dirty || ruleItem.get('trl4_value').touched || submitted) && ruleItem.get('trl4_value').errors.invalid">Enter valid value.</mat-error>
+                                                    </mat-form-field>
+                                                </div>                                                
+                                            </td>
+                                            <td class="noborder-right" >
+                                                <div>
+                                                    <mat-form-field appearance="outline" class="w-100 float-left">
+                                                        <mat-select disableOptionCentering formControlName="trl4_period" >
+                                                            <mat-option value="monthly">Monthly</mat-option>
+                                                            <mat-option value="annually">Annually</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>                                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-scrollbar>
+                        </div>
+
+                        <div class="col-lg-12 float-left wrap-button mar-bottom nopad">
+                            <button mat-raised-button class="float-left btn-common2 btn-01 mar-right">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </ng-scrollbar>
+</section>

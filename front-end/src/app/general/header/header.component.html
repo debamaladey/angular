@@ -1,0 +1,133 @@
+<header class="w-100 float-left">
+    <div class="w-100 float-left header-wrap">
+      <div class="logo float-left"><a href="#"><img src="../../assets/images/logo-main.PNG" alt=""></a></div>
+      <div class="float-right right-header">
+      <div class="user-menu float-right">
+      <button mat-button [matMenuTriggerFor]="menu" class="btn-user-account"><i class="material-icons">person</i></button>
+      <mat-menu #menu="matMenu" class="mat-custom-header">
+        <div class="infor-person w-100 float-left" *ngIf = "userType  == 'Customer'">Company Name <span class="w-100 float-left">{{currentUser.customer_name}}</span></div>
+        <div class="infor-person w-100 float-left">User Name : {{currentUser.name}}<span class="w-100 float-left">({{currentUser.role_name}})</span></div>
+        <button mat-menu-item  class="ss-but"  [routerLink]="['/config/change-password/change']"><i class="material-icons">
+            lock_open
+            </i> Change Password</button>
+        <a [routerLink]="['/login']"><button mat-menu-item class="ss-but"><i class="material-icons">settings_power</i> Log Out</button></a>
+      </mat-menu>
+      </div>
+      <div class="wrap-timedate float-right">
+        <span class="float-left clock-icon"><i class="material-icons">av_timer</i></span>
+        <span class="float-left clock-time">{{now | date: 'dd-MM-yyyy HH:mm'}}</span>
+      </div>
+      <div class="ticker float-right">
+          <!-- <app-ticker></app-ticker> -->
+          <div class="item-list">
+              <div class="ticker2 modern-ticker mt-round mt-scroll row">
+                <span class="bulb-tips float-left"><i class="material-icons">wb_incandescent</i></span>
+                <div class="mt-news" style="width: 400px;">
+                  <ul style="margin-left: -0px;">
+                    <li ><a href="#" >Energy consumptions shows unusable increase around 15:00 Hrs.</a> </li>
+                    <li ><a href="#" >Energy consumptions shows unusable increase around 15:00 Hrs.</a> </li>
+                    <li ><a href="#" >Energy consumptions shows unusable increase around 15:00 Hrs.</a> </li>
+                    <li ><a href="#" >Energy consumptions shows unusable increase around 15:00 Hrs.</a> </li>
+                    <li ><a href="#" >Energy consumptions shows unusable increase around 15:00 Hrs.</a> </li>
+                  </ul>
+                </div>
+                <div class="mt-controls">
+                  <div class="mt-prev" title="Previous"><i class="material-icons">navigate_before</i></div>
+                  <div class="mt-play mt-pause"></div>
+                  <div class="mt-next" title="Next"><i class="material-icons">navigate_next</i></div>
+                </div>
+              </div>
+            </div>
+          
+      </div>
+      <div class="weather-widget float-left">
+        <a class="inner-weather-widget float-left rel-pos" href="#">
+          <div class="wrapper">
+            <div class="sun"></div>
+            <div class="cloud">
+              <div class="cloud1">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="cloud1 c_shadow">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="cloud_s">
+              <div class="cloud1">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="cloud1 c_shadow">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="cloud_vs">
+              <div class="cloud1">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="cloud1 c_shadow">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+            <div class="haze"></div>
+            <div class="haze_stripe"></div>
+            <div class="haze_stripe"></div>
+            <div class="haze_stripe"></div>
+            <div class="thunder"></div>
+            <div class="rain">
+               <ul>
+                 <li></li>
+                 <li></li>
+                 <li></li>
+              </ul>
+            </div>
+            <div class="sleet">
+               <ul>
+                 <li></li>
+                 <li></li>
+                 <li></li>
+              </ul>
+            </div>
+            
+          </div>
+          <div class="float-left details-weather">
+            <h3>30 <sup>°C</sup></h3>
+            <p>Melbourne, Australia</p>
+          </div>
+        </a>
+      </div>
+      </div>
+    </div>
+    </header>
+    

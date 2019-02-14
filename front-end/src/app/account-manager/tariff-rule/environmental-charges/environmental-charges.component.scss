@@ -1,0 +1,10 @@
+@import './../../../../variables.scss';
+.add-but-table {
+    position: absolute;
+    bottom: 47px;
+}
+.delete-but-table {
+    bottom: 11px;
+    right: 6px;
+    left: inherit;
+}

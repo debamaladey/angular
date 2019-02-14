@@ -1,0 +1,30 @@
+@import './../../../variables.scss';
+.area-customers {
+    border-radius: $pix5;
+    margin-top: $pix20;
+    background: $white;
+    // box-shadow: $pix0 $pix4 $pix10  rgba(204, 204, 204, 0.34);
+}
+.customer-name-wrap {
+    margin: $pix7 $pix14 $pix7 $pix0;
+    font-size: $pix13;
+    padding: $pix4 $pix10 ;
+    background: $gray-1;
+    color: $white;
+    border-radius: $pix30;
+}
+.customer-name-wrap a i{
+    font-size: $pix17;
+    height: auto;
+    line-height: $pix10;
+    position: relative;
+    top: $pix5;
+    margin-left: $pix13;
+    color: $orange-2;
+}
+.cus-wrap {
+    background: $white;
+    padding: $pix15 $pix0;
+    box-shadow: $pix0 $pix4 $pix10 rgba(0,0,0,0.15);
+    border-radius: $pix4;
+}

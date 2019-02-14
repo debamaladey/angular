@@ -1,0 +1,19 @@
+@import './../../../../../variables.scss';
+.mat-form-field-infix {
+    width: 100%;
+}
+.mat-form-field {
+    width: 100%;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: rgba(0, 0, 0, 0.4) !important;
+    outline: none !important;
+}
+.add-but-three {
+    right: -20px;
+    left: inherit;
+    top: 2px;
+}
+.delete-but-three {
+    right: 8px;
+}

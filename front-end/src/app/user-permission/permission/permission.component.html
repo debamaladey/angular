@@ -1,0 +1,35 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+  <ng-scrollbar class="page-scroll">
+    <div class="wrap-mani w-100 float-left">
+      <div class="col-xl-12">
+        <h1 class="float-left">User Permission</h1>
+        <div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+          {{errorMsg}}
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+          {{succMsg}}
+        </div>
+      </div>
+      <div *ngIf="rolemoduleArray">
+        <form (ngSubmit)="onSubmit()">
+          <div class="col-lg-12 data-table-wrap float-left">
+            <div class="w-100 float-left inner-data-table">
+                <div *ngFor="let roles of roleLists">
+                  <h4>{{roles.role_name}}</h4>
+                  <div *ngFor="let modules of roles.modules">
+                    <input type="checkbox" class="module" name="module_name" (change)="userPermission(modules.module_id,roles.role_id,$event)" [checked] = 'checkModulePermission(modules.module_id,roles.role_id)'>{{modules.module_name}}
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-lg-12 float-left wrap-button mar-bottom">
+              <button mat-raised-button class="float-left btn-common2 btn-01 mar-right">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-scrollbar>
+</section>

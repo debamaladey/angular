@@ -1,0 +1,66 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <div class="col-xl-12">
+                <h1 class="float-left">Metering Configuration</h1><span class="stages float-right">Step 2 of 5</span>
+            </div>
+
+            <div class="col-lg-12 wrap-form float-left sel-admin-wrap">
+                <div class="w-100 float-left c-w-f inner-sel-admin">
+                    <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 nopad">
+                        <mat-label>Types of Resources </mat-label>
+                        <mat-form-field appearance="outline">
+                            <mat-select disableOptionCentering [(value)]="selected">
+                                <mat-option value="option1">Select Resources</mat-option>
+                                <mat-option value="option2">Options</mat-option>
+                                <mat-option value="option3">Options</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100 wrap-form float-left">
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                    <mat-label>Main Meter</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select disableOptionCentering [(value)]="selected">
+                            <mat-option value="option1">Select Option</mat-option>
+                            <mat-option value="option2">Options</mat-option>
+                            <mat-option value="option3">Options</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                    <mat-label>Sub Meter</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select disableOptionCentering [(value)]="selected">
+                            <mat-option value="option1">Select Option</mat-option>
+                            <mat-option value="option2">Options</mat-option>
+                            <mat-option value="option3">Options</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                    <mat-label>Data Integration Type </mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select disableOptionCentering [(value)]="selected">
+                            <mat-option value="option1">Select Option</mat-option>
+                            <mat-option value="option2">Options</mat-option>
+                            <mat-option value="option3">Options</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-lg-12 float-left wrap-button mar-bottom">
+                <button mat-raised-button class="float-left btn-common2 btn-01 mar-right">Save</button>
+                <button mat-raised-button class="float-left btn-common2 btn-02">Save & Exit</button>
+            </div>
+
+        </div>
+    </ng-scrollbar>
+</section>

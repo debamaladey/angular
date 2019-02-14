@@ -1,0 +1,10 @@
+<div mat-dialog-content class="messages-popup rel-pos">
+  <div class="alert alert-{{msgStatus}} alert-dismissible" *ngIf="msg">
+    {{msg}}
+  </div>
+  <div mat-dialog-actions class="close-popup">
+    <button mat-button (click)="close()"><i class="material-icons">close</i></button>
+  </div>
+</div>
+
+

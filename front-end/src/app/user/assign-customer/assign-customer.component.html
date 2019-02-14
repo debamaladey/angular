@@ -1,0 +1,41 @@
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+<h2 mat-dialog-title>Assign Customer</h2>
+<mat-dialog-content>
+    <div class="loader" *ngIf="show_load">Loading</div>
+    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+            <div class="w-100 wrap-form float-left">
+                <div class="w-100 float-left ">                    
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left c-w-f">
+                        <div class="w-100 float-left cus-wrap mar-top">
+                            <span *ngIf="customers.length == 0">No customers available right now</span>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+                                <mat-label>Select customers</mat-label>                                
+                                <mat-form-field appearance="outline" class="w-100 float-left">
+                                    <mat-select disableOptionCentering formControlName="customer" multiple>
+                                        <mat-option value="{{data1.id}}" *ngFor="let data1 of customers">{{data1.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="userFormGroup.get('customer').invalid && (userFormGroup.get('customer').dirty || userFormGroup.get('customer').touched)">
+                                        customer is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left customers-lists">
+                                <div class="w-100 float-left area-customers">
+                                    <span class="customer-name-wrap float-left" *ngFor="let data2 of assign_customers">
+                                        <font class="float-left">{{data2.customer_name}}</font>
+                                        <a (click)="deleteAssignUser(data2.relation_id)" class="float-right" href="javascript:void(0);"><i class="material-icons">clear</i></a>
+                                    </span>                                
+                                </div>
+                            </div>                                      
+                        </div>
+                    </div>
+                </div>
+            </div> 
+                        
+            <div class="col-lg-12 float-left wrap-button mar-bottom">
+                <button mat-raised-button class="float-left btn-common2 btn-01 mar-right"  [disabled]="!userFormGroup.valid">Save</button>
+            </div>
+    </form>
+</mat-dialog-content>

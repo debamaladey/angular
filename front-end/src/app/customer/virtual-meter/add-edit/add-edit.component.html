@@ -1,0 +1,178 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <form [formGroup]="meterFormGroup" (ngSubmit)="onSubmit()">
+                <div class="col-xl-12">
+                    <h1 class="float-left" *ngIf="!editId">Add Virtual Meter</h1>
+                    <h1 class="float-left" *ngIf="editId">Edit Virtual Meter</h1>
+                </div>
+                <div class="w-100 float-left add-meter-wrap">
+                    <div class="col-lg-12 float-left">
+                        <h3>Meter Information</h3>
+                        <div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+                            {{errorMsg}}
+                        </div>
+                        <div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+                            {{succMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 float-left wrap-form-add-vm c-w-f check-meter-type">
+                        <mat-label class="w-100 float-left">Source Meter Type</mat-label>
+                        <mat-radio-group formControlName="resource_id" (change)="resourceChange($event.value)">
+                            <span *ngFor="let resource of resources" class="float-left checkbox-wrap dark-checkbox-wrap">
+                                <mat-radio-button [value]="resource.resource_id">{{resource.resource_name}}</mat-radio-button>
+                            </span>
+                        </mat-radio-group>
+                        <div *ngIf="meterFormGroup.get('resource_id').invalid && submitted" class="w-100 float-left mess-error">
+                            <div *ngIf="meterFormGroup.get('resource_id').errors.required">Source Meter Type is
+                                required</div>
+                        </div>
+                    </div>
+
+                    <div class="w-100 float-left">
+                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left wrap-form-add-vm c-w-f">
+                            <mat-label>Tag ID</mat-label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input readonly matInput type="text" formControlName="given_tag_id">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left wrap-form-add-vm c-w-f">
+                        <mat-label>Meter ID.</mat-label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <input readonly matInput type="text" formControlName="given_meter_id">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left wrap-form-add-vm c-w-f">
+                        <mat-label>Meter Name</mat-label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <input matInput type="text" formControlName="meter_name">
+                            <mat-error *ngIf="meterFormGroup.get('meter_name').invalid && (meterFormGroup.get('meter_name').dirty || meterFormGroup.get('meter_name').touched || submitted) && meterFormGroup.get('meter_name').errors.required">Meter
+                                Name is required.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 float-left wrap-form-add-vm c-w-f">
+                        <mat-label>Consumption Area</mat-label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select disableOptionCentering formControlName="consumption_id">
+                                <mat-option value="">Select Consumption Area</mat-option>
+                                <mat-option *ngFor="let consp of consumptions" [value]="consp.id">{{consp.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>.
+                    <div class="w-100 float-left">
+                        <div class="col-lg-8 data-table-wrap float-left">
+                            <div class="w-100 float-left inner-data-table">
+                                <table id="example" class="table table-striped table-bordered table-wrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Benchmark Value</th>
+                                            <th>Priod</th>
+                                            <th>Type</th>
+                                            <th width="15%" class="no-sort">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="meterFormGroup.get('value_items').controls.length != 0" formArrayName="value_items">
+                                        <tr *ngFor="let ruleItem of meterFormGroup.get('value_items').controls; let i = index;"
+                                            [formGroupName]="i">
+                                            <td>{{ruleItem.value.meter_val}}</td>
+                                            <td>{{ruleItem.value.miv_priod}}</td>
+                                            <td>{{ruleItem.value.miv_type}}</td>
+                                            <td>
+                                                <a href="javascript:void(0);" (click)="editBenchmark(i)" class="btn-actions btn-edit float-left"><i
+                                                        class="material-icons">brush</i></a>
+                                                <a href="javascript:void(0);" (click)="deleteBenchmark(i)" class="btn-actions btn-delete float-left"><i
+                                                        class="material-icons">delete_forever</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="meterFormGroup.get('value_items').controls.length == 0">
+                                        <tr>
+                                            <td colspan="4">No data found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button *ngIf="this.meterFormGroup.get('value_items').length < 4" mat-raised-button type="button"
+                                (click)="openDialog()">Add Benchmark</button>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 float-left wrap-form-add-vm c-w-f">
+                        <mat-label>No of Source Meters</mat-label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <input [readonly]="nsmReadonly" maxlength="1" matInput type="text" formControlName="no_source_meter"
+                                (keyup)="no_source_meter_change($event)">
+                                <mat-error *ngIf="meterFormGroup.get('no_source_meter').invalid && (meterFormGroup.get('no_source_meter').dirty || meterFormGroup.get('no_source_meter').touched || submitted) && meterFormGroup.get('no_source_meter').errors.required">No of Source Meters is required.</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="meter-table-added col-lg-12 float-left  table-wrap">
+                    <div class="inner-wrap-table w-100 float-left">
+                        <table class="table table-bordered w-100 float-left">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Real/Virtua</th>
+                                    <th scope="col">Meter ID</th>
+                                    <th scope="col">Operration</th>
+                                    <th scope="col">Contribution(%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr formArrayName="source_meters" *ngFor="let sMeter of meterFormGroup.get('source_meters').controls; let i = index;">
+                                    <td scope="row">{{i+1}}</td>
+                                    <td class="c-w-f" [formGroupName]="i">
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="type" disableOptionCentering (selectionChange)="meterTypeChange($event.value, i, meterFormGroup.get('resource_id').value)">
+                                                <mat-option value="">Select Meter Type</mat-option>
+                                                <mat-option value="real">Real Meter</mat-option>
+                                                <mat-option value="virtual">Virtual Meter</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="sMeter.get('type').invalid && (sMeter.get('type').dirty || sMeter.get('type').touched || submitted) && sMeter.get('type').errors.required">Meter Type is required.</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="c-w-f" [formGroupName]="i">
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="meter_id" disableOptionCentering>
+                                                <mat-option value="">Select Meter</mat-option>
+                                                <mat-option *ngFor="let meter of sourceMeterList[i]" [value]="meter.meter_id">{{meter.given_meter_id}}
+                                                    [{{meter.meter_name}}]</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="sMeter.get('meter_id').invalid && (sMeter.get('meter_id').dirty || sMeter.get('meter_id').touched || submitted) && sMeter.get('meter_id').errors.required">Meter is required.</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="c-w-f" [formGroupName]="i">
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="operation" disableOptionCentering>
+                                                <mat-option value="">Select Operration</mat-option>
+                                                <mat-option value="+">Add</mat-option>
+                                                <mat-option value="-">Minus</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="sMeter.get('operation').invalid && (sMeter.get('operation').dirty || sMeter.get('operation').touched || submitted) && sMeter.get('operation').errors.required">Operration is required.</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="c-w-f" [formGroupName]="i">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <input formControlName="contribution" matInput type="text">
+                                            <mat-error *ngIf="sMeter.get('contribution').invalid && (sMeter.get('contribution').dirty || sMeter.get('contribution').touched || submitted) && sMeter.get('contribution').errors.required">Contribution is required.</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-12 float-left wrap-button mar-bottom nomar-top">
+                    <button mat-raised-button type="submit" (click)="submit('save')" class="float-left btn-common2 btn-01 mar-right">Save</button>
+                    <button mat-raised-button type="submit" (click)="submit('save_exit')" class="float-left btn-common2 btn-02">Save
+                        & Exit</button>
+                </div>
+            </form>
+        </div>
+    </ng-scrollbar>
+</section>

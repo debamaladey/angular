@@ -1,0 +1,33 @@
+@import './../../../../variables.scss';
+.price-display {
+    padding: $pix15;
+    background: $green-1;
+    min-width: 150px;
+    min-height: 58px;
+    border-radius: 60px;
+    color: $white;
+    font-family: $font-700;
+    font-size: 33px;
+    line-height: 32px;
+}
+.total-cost h2 {
+    font-size: 27px;
+    color: $gray-3;
+    font-weight: $weight300;
+    margin: $pix15 $pix0;
+    font-family: $font-300 !important;
+}
+.current-bi span {
+    font-size: $pix14;
+    color: $gray-3;
+}
+.current-bi span font{
+    font-size: $pix11;
+    color: $gray-2;
+}
+.current-bi {
+    margin-top: $pix10;
+}
+.graph-slider {
+    border-left:$pix1 solid $gray-4;
+}

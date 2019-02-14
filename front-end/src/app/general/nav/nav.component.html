@@ -1,0 +1,209 @@
+<div class="main-wrap-nav">
+  <nav class="navbar navbar-expand-lg">
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <ng-scrollbar class="nav-scroll">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div *ngIf="show_load">
+        <span *ngIf = "roleID==1">
+          <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item " *ngIf="hasPermission(3)">
+                    <a class="nav-link" routerLink="/config/resource/list" routerLinkActive="active">
+                        <i class="material-icons">
+                                rounded_corner
+                                </i>
+                        Resource for SA
+                    </a>
+                </li> -->
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/config/superadmin/dashboard" routerLinkActive="active">
+                        <i class="material-icons">
+                        rounded_corner
+                        </i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/config/resource/list" routerLinkActive="active">
+                        <i class="material-icons">
+                        rounded_corner
+                        </i>
+                        Resource 
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/config/mail/info" routerLinkActive="active">
+                        <i class="material-icons">
+                            email
+                        </i>
+                        Mail Configuration
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link"  routerLink="/user/list" routerLinkActive="active">
+                        <i class="material-icons">
+                            group
+                        </i>
+                        Users 
+                    </a>
+                </li> 
+                <li class="nav-item has-child">
+                    <a class="nav-link"  routerLink="/config/sacustomer/list" routerLinkActive="active">
+                        <i class="material-icons">
+                        group
+                        </i>
+                        Customer
+                    </a>
+                </li>
+                <li class="nav-item has-child">
+                    <a class="nav-link"  routerLink="/config/cluster/list" routerLinkActive="active">
+                        <i class="material-icons">
+                            flip_to_front
+                        </i>
+                        Cluster
+                    </a>
+                </li>
+                <li class="nav-item has-child">
+                    <a class="nav-link"  routerLink="/config/tariff/template/list" routerLinkActive="active">
+                        <i class="material-icons">
+                            flip_to_front
+                        </i>
+                        Template
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/user-permission/list" routerLinkActive="active" >
+                        <i class="material-icons">
+                            view_day
+                        </i>
+                        Module Permission
+                    </a>
+                </li> 
+          </ul>
+        </span> 
+        <span *ngIf = "(roleID==2 && customerID == 0)">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/account-manager/dashboard" routerLinkActive="active">
+                        <i class="material-icons">
+                        rounded_corner
+                        </i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/account-manager/customer" routerLinkActive="active">
+                        <i class="material-icons">
+                            group 
+                        </i>
+                        Customer
+                    </a>
+                </li>
+            </ul>
+        </span>
+        <span *ngIf = "(roleID==2 && customerID != 0)">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/account-manager/dashboard" routerLinkActive="active">
+                        <i class="material-icons">
+                        rounded_corner
+                        </i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item " >
+                    <a class="nav-link" routerLink="/account-manager/customer" routerLinkActive="active">
+                        <i class="material-icons">
+                            group 
+                        </i>
+                        Customer
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/customer/resources" routerLinkActive="active" >
+                        <i class="material-icons">
+                        view_day
+                        </i>
+                        Resource Management
+                    </a>
+                </li>
+                <li class="nav-item " >
+                    <a class="nav-link" routerLink="/customer/consumption" routerLinkActive="active" >
+                        <i class="material-icons">
+                        flip_to_front
+                        </i>
+                        Consumption
+                    </a>
+                </li>                    
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/customer/meter/list" routerLinkActive="active"><i class="material-icons">perm_data_setting</i>  Metering Configuration</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#"><i class="material-icons">pie_chart</i> Virtual Metering</a>
+                </li> 
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/user/list" routerLinkActive="active" >
+                        <i class="material-icons">
+                        group
+                        </i>
+                        Users
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#"><i class="material-icons">view_day</i> Bill</a>
+                </li>
+            </ul>
+        </span>
+        <span *ngIf = "userType  == 'Customer'">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/customer/dashboard/list" routerLinkActive="active">
+                        <i class="material-icons">
+                        rounded_corner
+                        </i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item " >
+                    <a class="nav-link" routerLink="/customer/resources" routerLinkActive="active" >
+                        <i class="material-icons">
+                        view_day
+                        </i>
+                        Resource Management
+                    </a>
+                </li>
+                <li class="nav-item " >
+                    <a class="nav-link" routerLink="/customer/consumption" routerLinkActive="active" >
+                        <i class="material-icons">
+                        flip_to_front
+                        </i>
+                        Consumption
+                    </a>
+                </li>                
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/customer/meter/list" routerLinkActive="active"><i class="material-icons">perm_data_setting</i>  Metering Configuration</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#"><i class="material-icons">pie_chart</i> Virtual Metering</a>
+                </li> 
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/user/list" routerLinkActive="active" >
+                        <i class="material-icons">
+                        group
+                        </i>
+                        Users
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#"><i class="material-icons">view_day</i> Bill</a>
+                </li>
+            </ul>
+        </span>
+      </div>
+      </div>
+  </ng-scrollbar>
+  </nav>
+</div>

@@ -1,0 +1,97 @@
+@import '../../variables';
+
+.top-login {
+    padding-top: 80px;
+    animation: move 0.5s;
+    -webkit-animation: move 0.5s;
+    position: $relative;
+    
+}
+@keyframes move {
+    from {
+      margin-left: 0%;
+      width: 100%; 
+      top:-50px;
+      opacity:0;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+      top:0px;
+      opacity:1;
+    }
+}
+.bottom-login {
+    height: calc(100vh - 200px);
+    position: absolute;
+    top: 200px;
+    padding: 0;
+    left: 0;
+    background:url(../../assets/images/bglogin.png) no-repeat bottom center $gray;
+    border-top: 1px solid $gray-4;
+    box-shadow: 0px 7px 100px rgba(132, 189, 0, 0.24);
+    animation: move3 2s;
+    -webkit-animation: move3 2s;
+    background-size: contain;
+}
+@keyframes move3 {
+    from {
+        opacity:0;
+      }
+      to {
+        opacity:1;
+      }
+}
+.form-login {
+    padding: $padding-1;
+    animation: move2 0.8s;
+    -webkit-animation: move2 0.8s;
+    position: $relative;
+}
+@keyframes move2 {
+    from {
+        margin-left: 0%;
+        width: 100%; 
+        bottom:-100px;
+        opacity:0;
+      }
+      to {
+        margin-left: 0%;
+        width: 100%;
+        bottom:0px;
+        opacity:1;
+      }
+}
+.form-login {
+    h1{
+        font-family: $font-700;
+        font-size:$fontsize-1;
+        color:$gray-3;
+        padding-bottom: $padding-3;
+    }
+}
+.button-area {
+    padding-top: $padding-2;
+}
+.btn-common {
+    padding: $padding-5 $padding-1;
+}
+.forgot {
+    font-size: $fontsize-4;
+    padding-top:$padding-3; 
+}
+.icon-login {
+    position: $absolute;
+    right: 0px;
+    top: 9px;
+    color: $green-2;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
+    border-width: 1px !important;
+}
+.mat-form-field {
+    margin-bottom: 2px;
+}
+
+

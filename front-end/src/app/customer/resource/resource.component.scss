@@ -1,0 +1,8 @@
+@import './../../../variables.scss';
+.main-tree-wrap {
+    padding: $pix25;
+    margin: $pix25 $pix0;
+    background: $white;
+    border-radius: $pix10;
+    box-shadow: $pix0 $pix0 $pix25 rgba(0,0,0,0.05);
+}

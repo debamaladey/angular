@@ -1,0 +1,36 @@
+<form [formGroup]="benchmarkFormGroup" (ngSubmit)="benchmarkSubmit()">
+    <div mat-dialog-content>
+        <div class="col-xl-12 float-left wrap-form-add-vm c-w-f">
+            <mat-label>Banchmark Value.</mat-label>
+            <mat-form-field class="w-100" appearance="outline">
+                <input matInput type="text" formControlName="meter_val">
+                <mat-error *ngIf="benchmarkFormGroup.get('meter_val').invalid && (benchmarkFormGroup.get('meter_val').dirty || benchmarkFormGroup.get('meter_val').touched || submitted) && benchmarkFormGroup.get('meter_val').errors.required">Banchmark value is required.</mat-error>
+                <mat-error *ngIf="benchmarkFormGroup.get('meter_val').invalid && (benchmarkFormGroup.get('meter_val').dirty || benchmarkFormGroup.get('meter_val').touched || submitted) && benchmarkFormGroup.get('meter_val').errors.invalid">Enter valid banchmark value.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-xl-12 float-left wrap-form-add-vm c-w-f">
+            <mat-label>Priod.</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select disableOptionCentering formControlName="miv_priod" (selectionChange)="priodChange($event.value)">
+                    <mat-option value="">Select Priod</mat-option>
+                    <mat-option *ngFor="let priodType of priodTypeComb" [value]="priodType.priod">{{priodType.priod}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="benchmarkFormGroup.get('miv_priod').invalid && (benchmarkFormGroup.get('miv_priod').dirty || benchmarkFormGroup.get('miv_priod').touched || submitted) && benchmarkFormGroup.get('miv_priod').errors.required">Type is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-xl-12 float-left wrap-form-add-vm c-w-f">
+            <mat-label>Type.</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select disableOptionCentering formControlName="miv_type">
+                    <mat-option value="">Select Type</mat-option>
+                    <mat-option *ngFor="let type of typeComb" [value]="type">{{type}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="benchmarkFormGroup.get('miv_type').invalid && (benchmarkFormGroup.get('miv_type').dirty || benchmarkFormGroup.get('miv_type').touched || submitted) && benchmarkFormGroup.get('miv_type').errors.required">Priod is required.</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button type="button" (click)="onNoClick()">No Thanks</button>
+        <button mat-button cdkFocusInitial>Add</button>
+    </div>
+</form>

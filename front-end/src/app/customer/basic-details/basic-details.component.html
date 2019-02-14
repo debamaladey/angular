@@ -1,0 +1,154 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <form [formGroup]="basicDetailsFormGroup" (ngSubmit)="onSubmit()">
+        <div class="wrap-mani w-100 float-left">
+            <div class="col-xl-12">
+                <h1 class="float-left">Basic Details</h1><span class="stages float-right">Step 1 of 5</span>
+            </div>
+
+            <div class="w-100 wrap-form float-left">
+                <div class="w-100 float-left ">
+                    <div class="col-xl-12">
+                        <h3 class="w-100 float-left">Customer Details</h3>
+                    </div>
+                    <div class="w-100 float-left ">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label>Customer Name</mat-label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input matInput type="email">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                            <mat-label>Customer Type</mat-label>
+                            <mat-form-field appearance="outline">
+                                <mat-select disableOptionCentering [(value)]="selected">
+                                    <mat-option value="option1">Select Option</mat-option>
+                                    <mat-option value="option2">Options</mat-option>
+                                    <mat-option value="option3">Options</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <h3 class="w-100 float-left">Address</h3>
+                    </div>
+                    <div class="col-lg-12 wrap-form float-left">
+                        <div class="w-100 float-left bg-inner-area">
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                                <mat-label>State</mat-label>
+                                <mat-form-field appearance="outline">
+                                    <mat-select disableOptionCentering [(value)]="selected">
+                                        <mat-option value="option1">Select Option</mat-option>
+                                        <mat-option value="option2">Options</mat-option>
+                                        <mat-option value="option3">Options</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                                <mat-label>Region </mat-label>
+                                <mat-form-field appearance="outline">
+                                    <mat-select disableOptionCentering [(value)]="selected">
+                                        <mat-option value="option1">Select Option</mat-option>
+                                        <mat-option value="option2">Options</mat-option>
+                                        <mat-option value="option3">Options</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                                <mat-label>Street Address</mat-label>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <input matInput type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100 wrap-form float-left">
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left c-w-f">
+                            <mat-label>Latitude</mat-label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input matInput type="text" value="22.572645">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left c-w-f">
+                            <mat-label>Longitude </mat-label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input matInput type="text" value="88.363892">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-12 float-left">
+                            <mat-label class="auto-fetch">Auto fetch from address, enter if not auto fetch</mat-label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100 wrap-form float-left">
+                <div class="col-xl-12 float-left">
+                        <h3 class="float-left topborder-heading w-100 float-left">Login Details</h3>
+                    </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 float-left c-w-f">
+                    <mat-label>Contact Name</mat-label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput type="text" formControlName="name">
+                    </mat-form-field>
+                    <div *ngIf="name.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                        <div *ngIf="name.errors?.required">
+                            Enter Contact Name.
+                        </div>
+                        <div *ngIf="name.errors?.pattern">
+                            Enter Valid Contact Name.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 float-left c-w-f">
+                    <mat-label>Email</mat-label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput type="email" formControlName="email">
+                    </mat-form-field>
+                    <div *ngIf="email.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                        <div *ngIf="email.errors?.required">
+                            Enter Login Email.
+                        </div>
+                        <div *ngIf="email.errors?.email">
+                            Enter Valid Email.
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 float-left c-w-f">
+                    <mat-label>Password</mat-label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput type="password" formControlName="password">
+                    </mat-form-field>
+                    <div *ngIf="password.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                        <div *ngIf="password.errors?.required">
+                            Enter Login Password.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 float-left c-w-f">
+                    <mat-label>Phone Number</mat-label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput type="text" formControlName="mobile">
+                    </mat-form-field>
+                    <div *ngIf="mobile.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                        <div *ngIf="mobile.errors?.required">
+                            Enter Mobile Number.
+                        </div>
+                        <div *ngIf="mobile.errors?.pattern">
+                            Enter Valid Mobile Number.
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 float-left wrap-button mar-bottom">
+                <button mat-raised-button class="float-left btn-common2 btn-01 mar-right">Save</button>
+                <button mat-raised-button class="float-left btn-common2 btn-02">Save & Exit</button>
+            </div>
+        </div>
+        </form> 
+
+    </ng-scrollbar>
+</section>

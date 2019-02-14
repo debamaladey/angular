@@ -1,0 +1,29 @@
+@import './../../../../../variables.scss';
+.tod-data-table th span {
+    padding: $pix5 $pix0 $pix0 $pix0;
+    font-size: $pix12;
+    font-weight: $weight600;
+    color: #e7f5c6;
+    width: 38%;
+}
+.tod-data-table .data-table-wrap thead th {
+    color: $white;
+    font-size: $pix15;
+    border: $pix0 !important;
+    padding: $pix8 $pix5;
+}
+.tod-data-table td {
+    font-size: $pix14;
+    padding: $pix9 $pix0 $pix9 $pix15;
+    font-weight:$weight700;
+}
+.tod-data-table td span{
+    color: $gray-1;
+    font-size: $pix13;
+    font-weight: $weight600;
+    padding: $pix0;
+    width: 38%;
+}
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
+    padding-right: $pix0;
+}

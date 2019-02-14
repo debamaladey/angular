@@ -1,0 +1,7 @@
+back-end/node_modules/
+front-end/src/environments/environment.ts
+back-end/npm-debug.log
+back-end/config_master.js
+**/node_modules
+config_master.js
+back-end/config_master.js

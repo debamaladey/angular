@@ -1,0 +1,78 @@
+<app-header></app-header>
+<app-nav></app-nav>
+<app-header></app-header>
+<app-nav></app-nav>
+<section class="w-100 float-left common-wrap-all-page">
+  <ng-scrollbar class="page-scroll">
+    <div class="wrap-mani w-100 float-left">
+      <div class="col-xl-12">
+        <h1>Mail Configuration</h1>
+      </div>
+      <!-- <div class="alert alert-{{msgStatus}} alert-dismissible" *ngIf="msg">
+        {{msg}}
+      </div> -->
+      <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+        <div class="w-100 float-left c-w-f">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left c-w-f">
+            <mat-label class="w-100 float-left">Email Protocol *</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width w-100 float-left">
+              <mat-select disableOptionCentering (selectionChange)="generateForm($event.value)" formControlName="protocol">
+                <mat-option value="">Select Option</mat-option>
+                <mat-option *ngFor="let list of emailProtocolList" value="{{list.code}}">{{list.code}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="emailForm.get('protocol').invalid && (emailForm.get('protocol').dirty || emailForm.get('protocol').touched) && emailForm.get('protocol').errors.required">Email Protocol is required</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="w-100 float-left c-w-f">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left c-w-f">
+            <mat-label class="w-100 float-left">Email From *</mat-label>
+            <mat-form-field class="example-full-width w-100 float-left" appearance="outline">
+              <input matInput type="text" formControlName="email_from">
+              <mat-error *ngIf="emailForm.get('email_from').invalid && (emailForm.get('email_from').dirty || emailForm.get('email_from').touched) && emailForm.get('email_from').errors.required">Email From is required.</mat-error>
+              <mat-error *ngIf="emailForm.get('email_from').invalid && (emailForm.get('email_from').dirty || emailForm.get('email_from').touched) && emailForm.get('email_from').errors.email">Email From must be a valid email address</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left hide-show-div-rj" *ngIf="selectedProtocol == 'smtp' || selectedProtocol == ''">
+          <div class="w-100 float-left c-w-f">
+            <mat-label class="w-100 float-left">SMTP Host Name *</mat-label>
+            <mat-form-field class="example-full-width w-100 float-left" appearance="outline">
+              <input matInput type="text" formControlName="host_name">
+              <mat-error *ngIf="emailForm.get('host_name').invalid && (emailForm.get('host_name').dirty || emailForm.get('host_name').touched) && emailForm.get('host_name').errors.required">SMTP Host Name is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="w-100 float-left c-w-f">
+            <mat-label class="w-100 float-left">SMTP Port *</mat-label>
+            <mat-form-field class="example-full-width w-100 float-left" appearance="outline">
+              <input matInput type="text" formControlName="smtp_port">
+              <mat-error *ngIf="emailForm.get('smtp_port').invalid && (emailForm.get('smtp_port').dirty || emailForm.get('smtp_port').touched) && emailForm.get('smtp_port').errors.required">SMTP Port is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="w-100 float-left c-w-f">
+            <mat-label class="w-100 float-left">SMTP User *</mat-label>
+            <mat-form-field class="example-full-width w-100 float-left" appearance="outline">
+              <input matInput type="text" formControlName="smtp_user">
+              <mat-error *ngIf="emailForm.get('smtp_user').invalid && (emailForm.get('smtp_user').dirty || emailForm.get('smtp_user').touched) && emailForm.get('smtp_user').errors.required">SMTP User is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="w-100 float-left c-w-f">
+            <mat-label class="w-100 float-left">SMTP Password *</mat-label>
+            <mat-form-field class="example-full-width w-100 float-left" appearance="outline">
+              <input matInput type="password" formControlName="smtp_password">
+              <mat-error *ngIf="emailForm.get('smtp_password').invalid && (emailForm.get('smtp_password').dirty || emailForm.get('smtp_password').touched) && emailForm.get('smtp_password').errors.required">SMTP Password is required.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-lg-12 float-left wrap-button">
+          <button mat-raised-button class="float-left btn-common2 btn-01 mar-right" [disabled]="!emailForm.valid" type="submit">Save</button>
+
+        </div>
+
+
+      </form>
+
+    </div>
+  </ng-scrollbar>
+</section>

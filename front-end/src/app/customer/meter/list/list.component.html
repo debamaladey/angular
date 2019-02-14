@@ -1,0 +1,47 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+	<ng-scrollbar class="page-scroll">
+		<div class="wrap-mani w-100 float-left">
+			<div class="col-xl-12">
+				<h1 class="float-left">Meter List</h1>
+				<div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+					{{errorMsg}}
+				</div>
+				<div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+					{{succMsg}}
+				</div>
+				<button mat-raised-button class="float-right btn-common2 btn-01 mar-right addbut" routerLink="/customer/meter/configuration">Tag Meter</button>
+				<button mat-raised-button class="float-right btn-common2 btn-01 mar-right addbut" routerLink="/customer/meter/add">Add Meter</button>
+			</div>
+			<div class="col-lg-12 data-table-wrap float-left">
+				<div class="w-100 float-left inner-data-table">
+					<table id="example" class="table table-striped table-bordered" style="width:100%">
+						<thead>
+							<tr>
+								<th>Meter Id</th>
+								<th>Meter Name</th>
+								<th>Type</th>
+								<th>Tag name</th>
+								<th width="10%" class="no-sort">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let row of meters">
+								<td>{{row.given_meter_id}}</td>
+								<td>{{row.meter_name}}</td>
+								<td>{{row.resource_name}}</td>
+								<td>{{row.tag_name}}</td>
+								<td>
+									<a href="javascript:void(0);" (click)="editMeter(row.meter_id)" class="btn-actions btn-edit float-left"><i class="material-icons">brush</i></a>
+									<a href="javascript:void(0);" (click)="configMeter(row.meter_id)" class="btn-actions btn-edit float-left"><i class="material-icons">build</i></a>
+									<a href="javascript:void(0);" (click)="deleteMeter(row.meter_id)" class="btn-actions btn-delete float-left"><i class="material-icons">delete_forever</i></a>
+								</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</ng-scrollbar>
+</section>

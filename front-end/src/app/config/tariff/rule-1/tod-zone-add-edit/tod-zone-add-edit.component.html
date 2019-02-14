@@ -1,0 +1,223 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <div class="col-xl-12">
+                <h1 class="float-left">TOD Zone Defination</h1>
+            </div>
+            <div class="alert alert-{{msgStatus}} alert-dismissible" *ngIf="msg">
+                {{msg}}
+            </div>
+
+            <form [formGroup]="todForm" (ngSubmit)="onSubmit()">
+                <div class="wrap-mani w-100 float-left" >
+                    <div class="meter-table-added col-lg-12 float-left table-wrap tod-table horizental-scroll-parent" >
+
+                        <div class="inner-wrap-table w-100 float-left col-lg-12">
+                            <ng-scrollbar class="page-scroll" [trackX]="true" [compact]="compact" [invertY]="invertY"
+                                [invertX]="invertX">
+                                <table class="table table-bordered float-left table-horizental-scroll" style="min-width:1800px;" formArrayName="todItems">
+                                    <thead>
+                                        <tr>
+                                            <th>TOD</th>
+                                            <th>Sunday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                            <th>Monday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                            <th>Tuesday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                            <th>Wednesday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                            <th>Thursday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                            <th>Friday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                            <th>Saturday
+                                                <div class="w-100 float-left">
+                                                    <span class="float-left col-lg-6">Start Time</span>
+                                                    <span class="float-left col-lg-6">End Time</span>
+                                                </div>
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody  >
+                                        <tr *ngFor="let nocm of todItems.controls; let icm=index" [formGroupName]="icm">
+                                            <td class="c-w-f">
+                                                <mat-form-field class="example-full-width w-100 input-sideby"
+                                                    appearance="outline">
+                                                    <input matInput formControlName="tod_name" type="text" class="w-100"
+                                                        >
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                    <mat-select disableOptionCentering  formControlName="sun_start" (ngModelChange)="firstChange($event)">
+                                                        <mat-option value="">HH:MM</mat-option>
+                                                        <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                         <span *ngIf="wh.id < 24">{{wh.val}}</span>   
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                    <mat-select disableOptionCentering  formControlName="sun_end" (ngModelChange)="endChange($event)">
+                                                        <mat-option value="">HH:MM</mat-option>
+                                                        <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                                <span *ngIf="wh.id > 0">{{wh.val}}</span>   
+                                                               </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="mon_start">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let whMonStart of workingHours"  value="{{whMonStart.val}}">
+                                                             <span *ngIf="whMonStart.id < 24">{{whMonStart.val}}</span>   
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="mon_end">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let whMonEnd of workingHours"  value="{{whMonEnd.val}}">
+                                                                    <span *ngIf="whMonEnd.id > 0">{{whMonEnd.val}}</span>   
+                                                                   </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering  formControlName="tues_start">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                             <span *ngIf="wh.id < 24">{{wh.val}}</span>   
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering  formControlName="tues_end">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                                    <span *ngIf="wh.id > 0">{{wh.val}}</span>   
+                                                                   </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering  formControlName="wed_start">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                             <span *ngIf="wh.id < 24">{{wh.val}}</span>   
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="wed_end">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                                    <span *ngIf="wh.id > 0">{{wh.val}}</span>   
+                                                                   </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="thur_start">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                             <span *ngIf="wh.id < 24">{{wh.val}}</span>   
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="thur_end">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                                    <span *ngIf="wh.id > 0">{{wh.val}}</span>   
+                                                                   </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="fri_start">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                             <span *ngIf="wh.id < 24">{{wh.val}}</span>   
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="fri_end">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                                    <span *ngIf="wh.id > 0">{{wh.val}}</span>   
+                                                                   </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </td>
+                                            <td class="c-w-f">
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="sat_start">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                             <span *ngIf="wh.id < 24">{{wh.val}}</span>   
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" class="drop-hour float-left">
+                                                        <mat-select disableOptionCentering formControlName="sat_end">
+                                                            <mat-option value="">HH:MM</mat-option>
+                                                            <mat-option *ngFor="let wh of workingHours"  value="{{wh.val}}">
+                                                                    <span *ngIf="wh.id > 0">{{wh.val}}</span>   
+                                                                   </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </ng-scrollbar>
+                            <a href="javascript:void(0);" (click)="cloneForm()" class="add-but-table"><i class="material-icons">add</i></a>
+                        </div>
+
+                        <div class="common float-left wrap-button mar-bottom nopad">
+                            <button type="submit" mat-raised-button class="float-left btn-common2 btn-01 mar-right" [disabled]="!todForm.valid" >Save</button>
+                            <!-- [disabled]="!todForm.valid" -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-scrollbar>
+</section>

@@ -1,0 +1,28 @@
+@import './../../../../variables.scss';
+.mat-form-field-infix {
+    width: 100%;
+}
+.mat-form-field {
+    width: 100%;
+}
+.auto-fetch {
+    padding: $pix3 $pix10;
+    background: $green-1;
+    border-radius: $pix18;
+    color: $white;
+    font-size: $fontsize-4;
+    color: $white;
+    font-size: $pix20;
+}
+.addbut {
+    margin-top: 42px;
+}
+.add-resource {
+    margin-bottom: 25px;
+}
+.add-resource mat-label{
+    margin-top: 15px;
+}
+.add-resource .btn-01 {
+    margin-top: 4px;
+}

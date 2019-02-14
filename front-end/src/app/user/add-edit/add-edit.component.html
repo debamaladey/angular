@@ -1,0 +1,77 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<section class="w-100 float-left common-wrap-all-page">
+    <ng-scrollbar class="page-scroll">
+        <div class="wrap-mani w-100 float-left">
+            <div class="col-xl-12">
+                <h1 class="float-left">User Details</h1>
+            </div>
+            <div class="loader" *ngIf="show_load">Loading</div>
+            <div class="alert alert-danger alert-dismissible" *ngIf="errorMsg">
+              {{errorMsg}}
+            </div>
+            <div class="alert alert-success alert-dismissible" *ngIf="succMsg">
+                {{succMsg}}
+            </div>
+            <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+              <div class="w-100 wrap-form float-left">
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                      <mat-label> Name</mat-label>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <input type="name" matInput placeholder="Enter Name" class="input-fields" formControlName="name" >  
+                        <mat-error *ngIf="userFormGroup.get('name').invalid && (userFormGroup.get('name').dirty || userFormGroup.get('name').touched) && userFormGroup.get('name').errors.required" >
+                            Name is required
+                        </mat-error>                      
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                      <mat-label>Email</mat-label>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <input type="email" matInput placeholder="Enter Email" class="input-fields" formControlName="email" [readonly]="isreadonly"> 
+                        <mat-error *ngIf="userFormGroup.get('email').invalid && (userFormGroup.get('email').dirty || userFormGroup.get('email').touched) && userFormGroup.get('email').errors.required">
+                            Email is required
+                        </mat-error>                       
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f" >
+                      <mat-label class="rel-pos w-100 float-left label-pass-change">Password  <mat-password-strength class="pass-strength float-right" (onStrengthChanged)="onStrengthChanged($event)" [password]="userFormGroup.get('password').value">
+                        </mat-password-strength></mat-label>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <input type="password" matInput placeholder="Enter Password" class="input-fields" formControlName="password" >
+                        <mat-error *ngIf="userFormGroup.get('password').invalid && (userFormGroup.get('password').dirty || userFormGroup.get('password').touched) && userFormGroup.get('password').errors.required">
+                            Password is required
+                        </mat-error>
+                      </mat-form-field>
+                     
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                      <mat-label>Phone Number</mat-label>
+                      <mat-form-field class="example-full-width country-code-ph"  appearance="outline"><font class="ph-country-code">{{phcode}}</font>
+                        <input type="number" matInput placeholder="Enter Phone Number" class="input-fields" formControlName="mobile" minlength="10">
+                        <mat-error *ngIf="userFormGroup.get('mobile').invalid && (userFormGroup.get('mobile').dirty || userFormGroup.get('mobile').touched) && userFormGroup.get('mobile').errors.required">
+                            Mobile is required
+                        </mat-error>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left c-w-f">
+                    <mat-label>User Role</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select disableOptionCentering [(value)]="selected" formControlName="role">
+                            <mat-option value="{{roles.role_id}}" *ngFor="let roles of userRoles">{{roles.role_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="userFormGroup.get('role').invalid && (userFormGroup.get('role').dirty || userFormGroup.get('role').touched) && userFormGroup.get('role').errors.required">
+                            Role is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+              </div>              
+              <div class="col-lg-12 float-left wrap-button mar-bottom">
+                  <button mat-raised-button class="float-left btn-common2 btn-01 mar-right"  [disabled]="((password_strength < 60))">Save</button>
+              </div>
+            </form>
+            <button mat-raised-button class="float-right btn-common2 btn-01 mar-right addbut" routerLink="/user/list">Back</button>
+        </div>
+
+    </ng-scrollbar>
+</section>
